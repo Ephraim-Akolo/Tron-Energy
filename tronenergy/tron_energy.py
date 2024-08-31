@@ -1,6 +1,7 @@
 import requests
 import hmac
 import hashlib
+import json
 from time import time
 
 
@@ -16,5 +17,8 @@ class TronEnergy(object):
     
     def sign(self, message:str):
         return hmac.new(self._api_secret.encode(), message.encode(), hashlib.sha256).hexdigest()
+    
+    def jsonify(self, data:dict):
+        return json.dumps(data, sort_keys=True, separators=(',', ':'))
 
     
