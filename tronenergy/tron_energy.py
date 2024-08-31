@@ -2,4 +2,6 @@ import requests
 
 
 class TronEnergy(object):
-    pass
+    base_url = 'https://itrx.io/'
+
+    
