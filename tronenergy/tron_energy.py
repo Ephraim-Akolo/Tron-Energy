@@ -1,4 +1,6 @@
 import requests
+import hmac
+import hashlib
 from time import time
 
 
@@ -11,5 +13,8 @@ class TronEnergy(object):
 
     def get_timestamp(self):
         return str(int(time()))
+    
+    def sign(self, message:str):
+        return hmac.new(self._api_secret.encode(), message.encode(), hashlib.sha256).hexdigest()
 
     
