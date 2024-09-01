@@ -16,23 +16,23 @@ class TronEnergy(object):
         self.sess.headers["API-KEY"] = api_key
         self.sess.headers["Content-Type"] = "application/json"
 
-    def get_timestamp(self):
+    def _get_timestamp(self):
         return str(int(time()))
     
-    def sign(self, message:str):
+    def _sign(self, message:str):
         return hmac.new(self._api_secret.encode(), message.encode(), hashlib.sha256).hexdigest()
     
-    def jsonify(self, data:dict):
+    def _jsonify(self, data:dict):
         if data:
             return json.dumps(data, sort_keys=True, separators=(',', ':'))
         return ""
     
     def make_request(self, method, url, data=None, **kwargs):
-        timestamp = self.get_timestamp()
+        timestamp = self._get_timestamp()
         headers = {"TIMESTAMP": timestamp}
         if method.upper() == "POST":
-            json_data = self.jsonify(data)
-            headers["SIGNATURE"] = self.sign(f'{timestamp}&{json_data}')
+            json_data = self._jsonify(data)
+            headers["SIGNATURE"] = self._sign(f'{timestamp}&{json_data}')
             response = self.sess.post(urljoin(self.base_url, url), data=json_data, headers=headers)
         else:
            response = self.sess.get(urljoin(self.base_url, url), headers=headers) 
@@ -40,8 +40,8 @@ class TronEnergy(object):
         return response.json()
 
     def verify_signature(self, signature:str, timestamp:str, data:dict):
-       json_data = self.jsonify(data)
-       expected_signature = self.sign(f"{timestamp}&{json_data}")
+       json_data = self._jsonify(data)
+       expected_signature = self._sign(f"{timestamp}&{json_data}")
        return hmac.compare_digest(signature, expected_signature)
 
     
