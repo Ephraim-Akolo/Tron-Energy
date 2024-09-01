@@ -37,7 +37,7 @@ class TronEnergy(object):
             headers["SIGNATURE"] = self._sign(f'{timestamp}&{json_data}')
             response = self.sess.post(urljoin(self.base_url, url), data=json_data, headers=headers)
         else:
-           response = self.sess.get(urljoin(self.base_url, url), headers=headers) 
+           response = self.sess.get(urljoin(self.base_url, url), params=data, headers=headers) 
 
         if response.status_code == 400:
             raise requests.exceptions.HTTPError(response.json())
