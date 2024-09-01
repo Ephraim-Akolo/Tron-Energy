@@ -35,7 +35,11 @@ class TronEnergy(object):
             response = self.sess.post(urljoin(self.base_url, url), data=json_data, headers=headers)
         else:
            response = self.sess.get(urljoin(self.base_url, url), headers=headers) 
-        response.raise_for_status()
+
+        if response.status_code == 400:
+            raise requests.exceptions.HTTPError(response.json())
+        else:
+            response.raise_for_status()
         return response.json()
 
     def verify_signature(self, signature:str, timestamp:str, data:dict):
@@ -49,9 +53,6 @@ class TronEnergy(object):
 
         This function sends a GET request to the '/api/v1/frontend/index-data' endpoint
         to retrieve public data. The request includes the necessary headers for authentication.
-
-        Parameters:
-        None
 
         Returns:
         dict: A dictionary containing the public data retrieved from the API.
