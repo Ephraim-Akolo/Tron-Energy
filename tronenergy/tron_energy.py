@@ -11,7 +11,6 @@ class TronEnergy(object):
 
     def __init__(self, api_key:str, api_secret:str):
         self._api_secret = api_secret
-
         self.sess = requests.session()
         self.sess.headers["API-KEY"] = api_key
         self.sess.headers["Content-Type"] = "application/json"
@@ -27,7 +26,7 @@ class TronEnergy(object):
             return json.dumps(data, sort_keys=True, separators=(',', ':'))
         return ""
     
-    def make_request(self, method, url, data=None, **kwargs):
+    def make_request(self, method, url, data=None):
         timestamp = self._get_timestamp()
         headers = {"TIMESTAMP": timestamp}
         if method.upper() == "POST":
@@ -43,5 +42,23 @@ class TronEnergy(object):
        json_data = self._jsonify(data)
        expected_signature = self._sign(f"{timestamp}&{json_data}")
        return hmac.compare_digest(signature, expected_signature)
+    
+    def get_public_data(self):
+        """
+        Retrieves public data from the TronEnergy API.
+
+        This function sends a GET request to the '/api/v1/frontend/index-data' endpoint
+        to retrieve public data. The request includes the necessary headers for authentication.
+
+        Parameters:
+        None
+
+        Returns:
+        dict: A dictionary containing the public data retrieved from the API.
+        """
+        url = "/api/v1/frontend/index-data"
+        return self.make_request("GET", url)
+    
+    
 
     
