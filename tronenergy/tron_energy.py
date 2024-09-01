@@ -92,5 +92,24 @@ class TronEnergy(object):
         if callback_url:
             data["callback_url"] = callback_url
         return self.make_request("POST", url, data)
+    
+    def transfer_small_trx_amount(self, amount:int, receive_address:TronAddress):
+        """
+        Transfers small Tron amount to a specified address.
+
+        Parameters:
+            amount (int): The amount of Tron in Sun to be transferred between 100000 - 10000000. That is, between 0.1-10 TRX
+            receive_address (TronAddress): The Tron address to which the Tron will be transferred.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
+        url = "/api/v1/frontend/order/transfer"
+        data = {
+            "amount": amount,
+            "receive_address": receive_address,
+        }
+        return self.make_request("POST", url, data)
         
+
         
