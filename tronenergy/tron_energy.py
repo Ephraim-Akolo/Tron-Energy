@@ -27,6 +27,16 @@ class TronEnergy(object):
             return json.dumps(data, sort_keys=True, separators=(',', ':'))
         return ""
     
-    
+    def make_request(self, method, url, data=None, **kwargs):
+        timestamp = self.get_timestamp()
+        headers = {"TIMESTAMP": timestamp}
+        if method.upper() == "POST":
+            json_data = self.jsonify(data)
+            headers["SIGNATURE"] = self.sign(f'{timestamp}&{json_data}')
+            response = self.sess.post(urljoin(self.base_url, url), data=json_data, headers=headers)
+        else:
+           response = self.sess.get(urljoin(self.base_url, url), headers=headers) 
+        response.raise_for_status()
+        return response.json()
 
     
