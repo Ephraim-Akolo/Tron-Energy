@@ -39,4 +39,9 @@ class TronEnergy(object):
         response.raise_for_status()
         return response.json()
 
+    def verify_signature(self, signature:str, timestamp:str, data:dict):
+       json_data = self.jsonify(data)
+       expected_signature = self.sign(f"{timestamp}&{json_data}")
+       return hmac.compare_digest(signature, expected_signature)
+
     
