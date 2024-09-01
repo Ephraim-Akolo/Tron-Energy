@@ -119,4 +119,20 @@ class TronEnergy(object):
             "receive_address": receive_address,
         }
         return self.make_request("POST", url, data)
+    
+    def fetch_purchase_by_number_of_transfers(self, receive_address:TronAddress):
+        """
+        Parameters:
+            receive_address (TronAddress): Query a specific address, if not filled in, return all.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
+        url = f"/api/v1/frontend/count-delegate-policy"
+        data = {
+            "receive_address": receive_address,
+        }
+        return self.make_request("GET", url, data)
         
+
+ 
