@@ -63,6 +63,17 @@ class TronEnergy(object):
         url = "/api/v1/frontend/index-data"
         return self.make_request("GET", url)
     
-    
-
-    
+    def place_order(self, receive_address:TronAddress, energy_amount:int, period:str='1H', out_trade_no:str=None, callback_url:str=None):
+        url = "/api/v1/frontend/order"
+        data = {
+            "receive_address": receive_address,
+            "energy_amount": energy_amount,
+            "period": period,
+        }
+        if out_trade_no:
+            data["out_trade_no"] = out_trade_no
+        if callback_url:
+            data["callback_url"] = callback_url
+        return self.make_request("POST", url, data)
+        
+        
