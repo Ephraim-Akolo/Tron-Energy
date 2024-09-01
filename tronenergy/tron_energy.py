@@ -104,11 +104,11 @@ class TronEnergy(object):
         }
         return self.make_request("POST", url, data)
     
-    def purchase_by_number_of_transfers(self, times, receive_address):
+    def purchase_by_number_of_transfers(self, times:int, receive_address:TronAddress):
         """
         Parameters:
             times (int): Number of purchases, 5-1000 times
-            receive_address (TronAddress): The Tron address to which the Tron will be transferred.
+            receive_address (TronAddress): The Tron address to which the resources will be transferred.
 
         Returns:
             dict: A dictionary containing the response from the API.
