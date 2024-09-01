@@ -54,9 +54,6 @@ class TronEnergy(object):
         """
         Retrieves public data from the TronEnergy API.
 
-        This function sends a GET request to the '/api/v1/frontend/index-data' endpoint
-        to retrieve public data. The request includes the necessary headers for authentication.
-
         Returns:
         dict: A dictionary containing the public data retrieved from the API.
         """
@@ -67,12 +64,8 @@ class TronEnergy(object):
         """
         Places an energy order on the TronEnergy API.
 
-        This function sends a POST request to the '/api/v1/frontend/order' endpoint
-        to place an energy order. The request includes the necessary headers for authentication
-        and the order details.
-
         Parameters:
-            receive_address (TronAddress): The Tron address where the energy will be received.
+            receive_address (TronAddress): The Tron address where the energy will be received. The address needs to be activated, otherwise the order will fail.
             energy_amount (int): The amount of energy to be ordered.
             period (str, optional): The period for which the energy is to be ordered. Defaults to '1H'.
             out_trade_no (str, optional): The unique identifier for the order.
