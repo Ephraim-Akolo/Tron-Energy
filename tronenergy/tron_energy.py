@@ -64,6 +64,23 @@ class TronEnergy(object):
         return self.make_request("GET", url)
     
     def place_order(self, receive_address:TronAddress, energy_amount:int, period:str='1H', out_trade_no:str=None, callback_url:str=None):
+        """
+        Places an energy order on the TronEnergy API.
+
+        This function sends a POST request to the '/api/v1/frontend/order' endpoint
+        to place an energy order. The request includes the necessary headers for authentication
+        and the order details.
+
+        Parameters:
+            receive_address (TronAddress): The Tron address where the energy will be received.
+            energy_amount (int): The amount of energy to be ordered.
+            period (str, optional): The period for which the energy is to be ordered. Defaults to '1H'.
+            out_trade_no (str, optional): The unique identifier for the order.
+            callback_url (str, optional): The URL to which the API will send a callback when the order is fulfilled.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
         url = "/api/v1/frontend/order"
         data = {
             "receive_address": receive_address,
