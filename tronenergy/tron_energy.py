@@ -6,6 +6,9 @@ from urllib.parse import urljoin
 from time import time
 
 
+TronAddress = str
+
+
 class TronEnergy(object):
     base_url = 'https://itrx.io/'
 
