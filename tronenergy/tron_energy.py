@@ -120,7 +120,7 @@ class TronEnergy(object):
         }
         return self.make_request("POST", url, data)
     
-    def fetch_purchase_by_number_of_transfers(self, receive_address:TronAddress=None):
+    def list_purchases_by_number_of_transfers(self, receive_address:TronAddress=None):
         """
         Parameters:
             receive_address (TronAddress): Query a specific address, if not filled in, return all.
