@@ -217,6 +217,16 @@ class TronEnergy(object):
             "period": period,
         }
         return self.make_request("GET", url, data)
+    
+    def get_api_usage_summary(self):
+        """
+        Retrieves API usage summary.
+
+        Returns:
+            dict: A dictionary containing the API usage summary.
+        """
+        url = "/api/v1/frontend/userapi/summary"
+        return self.make_request("GET", url)
         
 
  
