@@ -175,8 +175,20 @@ class TronEnergy(object):
         url = f"/api/v1/frontend/auto-delegate-policy/{id}/change-status"
         data = {"status": int(status)} 
         return self.make_request("POST", url, data)
-    
 
+    def get_order(self, order_no:str):
+        """
+        Parameters:
+            order_no (str): The order number returned when placing an order.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
+        url = "/api/v1/frontend/order/query"
+        data = {"serial": order_no}
+        return self.make_request("GET", url, data)
+    
+   
         
 
  
