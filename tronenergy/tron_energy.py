@@ -29,7 +29,7 @@ class TronEnergy(object):
             return json.dumps(data, sort_keys=True, separators=(',', ':'))
         return ""
     
-    def make_request(self, method, url, data=None):
+    def make_request(self, method:str, url:str, data:dict=None):
         timestamp = self._get_timestamp()
         headers = {"TIMESTAMP": timestamp}
         if method.upper() == "POST":
