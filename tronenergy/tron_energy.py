@@ -188,7 +188,19 @@ class TronEnergy(object):
         data = {"serial": order_no}
         return self.make_request("GET", url, data)
     
-   
+    def recycle_order(self, order_no:str):
+        """
+        Parameters:
+            order_no (str): The order number returned when placing an order.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
+        url = "/api/v1/frontend/order/reclaim"
+        data = {"serial": order_no}
+        return self.make_request("POST", url, data)
+    
+    
         
 
  
