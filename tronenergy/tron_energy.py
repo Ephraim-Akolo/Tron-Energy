@@ -163,6 +163,19 @@ class TronEnergy(object):
         data = {"receive_address": receive_address} if receive_address else None
         return self.make_request("GET", url, data)
 
+    def modify_smart_delegate(self, id:int, status:bool):
+        """
+        Parameters:
+            id (int): The ID of the smart delegate policy.
+            status (bool): The new status of the smart delegate policy.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
+        url = f"/api/v1/frontend/auto-delegate-policy/{id}/change-status"
+        data = {"status": int(status)} 
+        return self.make_request("POST", url, data)
+    
 
         
 
