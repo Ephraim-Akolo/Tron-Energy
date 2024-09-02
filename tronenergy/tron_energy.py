@@ -120,7 +120,7 @@ class TronEnergy(object):
         }
         return self.make_request("POST", url, data)
     
-    def list_purchases_by_number_of_transfers(self, receive_address:TronAddress=None):
+    def list_purchases_by_number_of_transfers(self, receive_address:TronAddress=None): # Note: We will have to do something about pagination here.
         """
         Parameters:
             receive_address (TronAddress): Query a specific address, if not filled in, return all.
@@ -151,7 +151,7 @@ class TronEnergy(object):
             data["max_energy"] = max_energy
         return self.make_request("POST", url, data)
     
-    def list_smart_delegate(self, receive_address:TronAddress=None):
+    def list_smart_delegate(self, receive_address:TronAddress=None): # Note: We will have to do something about pagination here.
         """
         Parameters:
             receive_address (TronAddress): Query a specific address, if not filled in, return all.
