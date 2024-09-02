@@ -131,6 +131,27 @@ class TronEnergy(object):
         url = f"/api/v1/frontend/count-delegate-policy"
         data = {"receive_address": receive_address} if receive_address else None
         return self.make_request("GET", url, data)
+    
+    def create_smart_delegate(self, period:int, receive_address:TronAddress, max_energy:int=None):
+        """
+        Parameters:
+            period (int): The commission period, 1-30.
+            receive_address (TronAddress): The Tron address to which the energy will be received.The address needs to be activated, otherwise the order will fail.
+            max_energy (int, optional): The Amount to keep available.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
+        url = "/api/v1/frontend/auto-delegate-policy"
+        data = {
+            "period": period,
+            "receive_address": receive_address,
+        }
+        if max_energy:
+            data["max_energy"] = max_energy
+        return self.make_request("POST", url, data)
+    
+
         
 
  
