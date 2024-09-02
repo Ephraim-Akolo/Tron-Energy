@@ -151,6 +151,18 @@ class TronEnergy(object):
             data["max_energy"] = max_energy
         return self.make_request("POST", url, data)
     
+    def list_smart_delegate(self, receive_address:TronAddress=None):
+        """
+        Parameters:
+            receive_address (TronAddress): Query a specific address, if not filled in, return all.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
+        url = "/api/v1/frontend/auto-delegate-policy"
+        data = {"receive_address": receive_address} if receive_address else None
+        return self.make_request("GET", url, data)
+
 
         
 
