@@ -200,7 +200,23 @@ class TronEnergy(object):
         data = {"serial": order_no}
         return self.make_request("POST", url, data)
     
-    
+    def estimate_order(self, energy_amount:int, period:str="1H"):
+        """
+        Estimates the price of an energy order.
+
+        Parameters:
+            energy_amount (int): The amount of energy to be ordered.
+            period (str, optional): The period for which the energy is to be ordered. Defaults to '1H'.
+
+        Returns:
+            dict: A dictionary containing the response from the API.
+        """
+        url = "/api/v1/frontend/order/price"
+        data = {
+            "energy_amount": energy_amount,
+            "period": period,
+        }
+        return self.make_request("GET", url, data)
         
 
  
