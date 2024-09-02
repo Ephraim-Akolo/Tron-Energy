@@ -1,3 +1,4 @@
+import os
 import requests
 import hmac
 import hashlib
@@ -12,8 +13,18 @@ TronAddress = str
 class TronEnergy(object):
     base_url = 'https://itrx.io/'
 
-    def __init__(self, api_key:str, api_secret:str):
-        self._api_secret = api_secret
+    def __init__(self, api_key:str=None, api_secret:str=None):
+        
+        if not api_secret:
+            api_secret = os.getenv('TRON_ENERGY_API_SECRET')
+        if api_secret is None:
+            raise ValueError("API secret is required")
+        if not api_key:
+            api_key = os.getenv('TRON_ENERGY_API_KEY')
+        if api_key is None:
+            raise ValueError("API key is required")
+
+        self._api_secret = str(api_secret)
         self.sess = requests.session()
         self.sess.headers["API-KEY"] = api_key
         self.sess.headers["Content-Type"] = "application/json"
