@@ -12,13 +12,6 @@ TronAddress = str
 
 class TronEnergy(object):
     base_url = 'https://itrx.io/'
-    _sess = None
-
-    @property
-    def sess(self) -> requests.Session:
-        if self._sess is None:
-            self._sess = requests.session()
-        return self._sess
 
     def __init__(self, api_key:str=None, api_secret:str=None):
         
@@ -32,6 +25,7 @@ class TronEnergy(object):
             raise ValueError("API key is required")
 
         self._api_secret = str(api_secret)
+        self.sess = requests.session()
         self.sess.headers["API-KEY"] = api_key
         self.sess.headers["Content-Type"] = "application/json"
 
