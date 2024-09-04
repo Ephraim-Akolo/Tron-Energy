@@ -149,6 +149,28 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.post')
+    def test_create_smart_delegate(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "message": "1 smart delegate has been added",
+            "balance": 813900029257
+
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "receive_address": "TR7NHnXw5423f8j766h899234567890",
+            "period": 1
+        }
+    
+        # Act
+        response = self.tron_energy.create_smart_delegate(*data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
