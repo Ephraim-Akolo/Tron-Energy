@@ -213,6 +213,25 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.post')
+    def test_modify_smart_delegate(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "id": 21,
+            "status": False,
+        }
+    
+        # Act
+        response = self.tron_energy.modify_smart_delegate(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
