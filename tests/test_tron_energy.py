@@ -171,6 +171,48 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.get')
+    def test_list_smart_delegate(self, mock_get):
+        # Arrange
+        expected_response = {
+            "count": 1,
+            "code": 0,
+            "page": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "id": 21,
+                    "receive_address": "TNfdtE7p8pEfTTbfRb88gikf2tt5ENc86b",
+                    "status": 1, # Is it valid?
+                    "last_step": 1, 
+                    "main_delegated": False, # Delegated status, valid during automatic renewal
+                    "expired_time": None,
+                    "create_time": "2023-10-09T11:13:12.288373+08:00",
+                    "update_time": "2023-10-09T16:35:36.559760+08:00",
+                    "last_step_display": "delegated",
+                    "status_display": "on",
+                    "auto_type": 1, # 1 is smart hosting, 2 is automatic renewal only
+                    "auto_type_display": "smart hosting",
+                    "next_delegate_time": None, # Valid during automatic renewal
+                    "max_energy": 50000, # maintain energy
+                    "period": 3, # Commission period
+                },
+            ]
+        }
+
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "receive_address": "TR7NHnXw5423f8j766h899234567890",
+        }
+    
+        # Act
+        response = self.tron_energy.list_smart_delegate(*data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
