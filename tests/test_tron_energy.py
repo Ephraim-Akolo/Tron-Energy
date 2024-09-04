@@ -44,6 +44,29 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.post')
+    def test_place_order(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "serial": "7297a8a2a9e39b86fc5bad0d2e9edda2",
+            "amount": 3120000,
+            "balance": 813900029257
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "receive_address": "TR7NHnXw5423f8j766h899234567890",
+            "energy_amount": 3120000,
+            "period": "1H"
+        }
+    
+        # Act
+        response = self.tron_energy.place_order(*data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
