@@ -270,6 +270,25 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.post')
+    def test_recycle_order(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "message": "request accept"
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "order_no": "58b451473d290f92443eabf0322b9907"
+        }
+    
+        # Act
+        response = self.tron_energy.recycle_order(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
