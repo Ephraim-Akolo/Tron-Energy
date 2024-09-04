@@ -312,6 +312,30 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.get')
+    def test_get_api_usage_summary(self, mock_get):
+        # Arrange
+        expected_response = {
+            "name": "MY API",
+            "create_time": "2023-04-28 12:31:04",
+            "total_count": 46,
+            "total_sum_energy": 3696000,
+            "total_sum_trx": 598165000,
+            "today_count": 0,
+            "today_sum_energy": 0,
+            "today_sum_trx": 0,
+            "yesterday_count": 1,
+            "yesterday_sum_energy": 1300000,
+            "yesterday_sum_trx": 197600000
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        # Act
+        response = self.tron_energy.get_api_usage_summary()
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
