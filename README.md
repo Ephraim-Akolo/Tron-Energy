@@ -16,7 +16,7 @@ Tron-Energy is a Python package designed to simplify interaction with the Tron e
 To install the Tron-Energy package, run the command:
 
 ```bash
-pip install tronenergy>
+pip install tronenergy
 ```
 
 
