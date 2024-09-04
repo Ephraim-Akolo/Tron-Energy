@@ -108,6 +108,47 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.get')
+    def test_list_purchases_by_number_of_transfers(self, mock_get):
+        # Arrange
+        expected_response = {
+            "count": 2,
+            "code": 0,
+            "page": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "id": 2,
+                    "receive_address": "TEX5nLeFJ1dyazhJC3P9eYJs7hxgk7knJF",
+                    "status": 1,
+                    "last_step": 0,
+                    "main_delegated": False,
+                    "expired_time": None,
+                    "create_time": "2023-08-23T11:09:27.986610+08:00",
+                    "update_time": "2023-08-23T11:09:27.986660+08:00",
+                    "last_step_display": "deledate",
+                    "status_display": "enable",
+                    "auto_type": 1,                     # 1-only energy，2-energy+bandwidth
+                    "auto_type_display": "only energy",
+                    "max_energy": 65000,
+                    "period": 7,
+                    "count_limit": 8                    # times
+                },
+            ]
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "receive_address": "TR7NHnXw5423f8j766h899234567890",
+        }
+    
+        # Act
+        response = self.tron_energy.list_purchases_by_number_of_transfers(*data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
