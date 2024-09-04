@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=6.0.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Tron-Energy"
+dynamic = ["version"]
+description = "A simple package to simplify interfacing with tron energy lending RESTful API"
+authors = [{name = "Ephraim", email = "ephraimakolo2017@gmail.com"}]
+license = {text = "MIT"}
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.7,<4.0"
+keywords = ["TRON-ENERGY", "tronenergy"]
+classifiers = [
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+]
+
+dependencies = ["requests>=2,<3", "aiohttp>=3,<4"]
+
+[project.urls]
+homepage = "https://itrx.io/"
+repository = "https://github.com/Ephraim-Akolo/Tron-Energy"
+
+[tool.setuptools_scm]
+write_to = "tronenergy/version.py"
+version_scheme = "post-release"
+local_scheme = "no-local-version"
+
+[tool.black]
+line-length = 127
+
+[tool.isort]
+profile = "black"
+line_length = 127
+
+[tool.mypy]
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+warn_return_any = true
+no_implicit_optional = true
+strict_optional = true
+ignore_missing_imports = true
+
+[tool.coverage.run]
+omit = [
+    "*__init__.py",
+    "tests/*",
+    "venv/*",
+    ".venv/*",
+    "env/*",
+    "setup.py",
+]
+
+[tool.coverage.report]
+show_missing = true
