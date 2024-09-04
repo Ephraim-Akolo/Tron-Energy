@@ -88,6 +88,26 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.post')
+    def test_purchase_by_number_of_transfers(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "balance": 813900029257
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "receive_address": "TR7NHnXw5423f8j766h899234567890",
+            "times": 5 
+        }
+    
+        # Act
+        response = self.tron_energy.purchase_by_number_of_transfers(*data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
