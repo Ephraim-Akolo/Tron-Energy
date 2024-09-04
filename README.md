@@ -123,9 +123,13 @@ The tests cover various functionalities, including placing orders, estimating or
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
+## Acknowledgements
+
+This package was inspired by and partially based on the examples and guidelines in the [Tron Energy API Documentation](https://develop.itrx.io/100-before.html). We appreciate the comprehensive resources provided by the Tron Energy team.
+
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request if you have suggestions for improvements or new features.
+Contributions are welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
 
 ---
 
