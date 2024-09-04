@@ -67,6 +67,27 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.post')
+    def test_transfer_small_trx_amount(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "txid": "9df44479551ef93c9bbfeca3cb82ef1564199d2d492ad38f7f1d2e454f5efb0f",
+            "balance": 813900029257
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "receive_address": "TR7NHnXw5423f8j766h899234567890",
+            "amount": 500_000 # 0.5 TRX
+        }
+    
+        # Act
+        response = self.tron_energy.transfer_small_trx_amount(*data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
