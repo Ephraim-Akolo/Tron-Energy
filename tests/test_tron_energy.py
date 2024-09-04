@@ -62,7 +62,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         }
     
         # Act
-        response = self.tron_energy.place_order(*data)
+        response = self.tron_energy.place_order(**data)
     
         # Assert
         self.assertEqual(response, expected_response)
@@ -83,7 +83,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         }
     
         # Act
-        response = self.tron_energy.transfer_small_trx_amount(*data)
+        response = self.tron_energy.transfer_small_trx_amount(**data)
     
         # Assert
         self.assertEqual(response, expected_response)
@@ -103,7 +103,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         }
     
         # Act
-        response = self.tron_energy.purchase_by_number_of_transfers(*data)
+        response = self.tron_energy.purchase_by_number_of_transfers(**data)
     
         # Assert
         self.assertEqual(response, expected_response)
@@ -144,7 +144,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         }
     
         # Act
-        response = self.tron_energy.list_purchases_by_number_of_transfers(*data)
+        response = self.tron_energy.list_purchases_by_number_of_transfers(**data)
     
         # Assert
         self.assertEqual(response, expected_response)
@@ -166,7 +166,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         }
     
         # Act
-        response = self.tron_energy.create_smart_delegate(*data)
+        response = self.tron_energy.create_smart_delegate(**data)
     
         # Assert
         self.assertEqual(response, expected_response)
@@ -208,7 +208,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         }
     
         # Act
-        response = self.tron_energy.list_smart_delegate(*data)
+        response = self.tron_energy.list_smart_delegate(**data)
     
         # Assert
         self.assertEqual(response, expected_response)
