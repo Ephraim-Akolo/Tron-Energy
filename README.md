@@ -64,7 +64,7 @@ print(estimate)
 # Place the energy order
 order_response = tron_energy.place_order(
     receive_address="TR7NHnXw5423f8j766h899234567890",
-    energy_amount=1000,
+    energy_amount=100_000,
     period='1H'
 )
 print(order_response)
