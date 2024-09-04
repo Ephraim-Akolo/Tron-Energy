@@ -49,7 +49,7 @@ print(order_response)
 Here’s an example of how you might use Tron-Energy to estimate the cost of an energy order and then place the order:
 
 ```python
-from tron_energy import TronEnergy
+from tronenergy import TronEnergy
 
 # Initialize the TronEnergy client
 tron_energy = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
@@ -75,7 +75,7 @@ print(order_response)
 ### `TronEnergy`
 
 - **`__init__(self, api_key: str, api_secret: str)`**
-  - Initializes the `TronEnergy` object with the given API key and secretL.
+  - Initializes the `TronEnergy` object with the given API key and secret.
   
 - **`get_public_data(self) -> dict`**
   - Retrieves public data from the TronEnergy API.
