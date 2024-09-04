@@ -289,6 +289,29 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tronenergy.tron_energy.requests.Session.get')
+    def test_estimate_order(self, mock_get):
+        # Arrange
+        expected_response = {
+            "period": "1H",
+            "energy_amount": 32000,
+            "price": 100,
+            "total_price": 10192000,
+            "addition": 600000
+        }
+        mock_get.return_value.json.return_value = expected_response
+
+        data = {
+            "energy_amount": 32000,
+            "period": '1H',
+            }
+    
+        # Act
+        response = self.tron_energy.estimate_order(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
 
 if __name__ == '__main__':
     unittest.main()
