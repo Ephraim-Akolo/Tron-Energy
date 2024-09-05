@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
-from tronenergy import TronEnergy
+from tron_energy import TronEnergy
 
 class TestTronEnergyMethods(unittest.TestCase):
     def setUp(self):

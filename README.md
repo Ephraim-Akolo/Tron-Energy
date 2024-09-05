@@ -27,7 +27,7 @@ Ensure you have Python 3.6 or higher installed.
 To use the Tron-Energy package, start by importing the necessary classes and creating an instance of the `TronEnergy` class:
 
 ```python
-from tronenergy import TronEnergy
+from tron_energy import TronEnergy
 
 # Create an instance of TronEnergy
 tron_energy = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
@@ -49,7 +49,7 @@ print(order_response)
 Here’s an example of how you might use Tron-Energy to estimate the cost of an energy order and then place the order:
 
 ```python
-from tronenergy import TronEnergy
+from tron_energy import TronEnergy
 
 # Initialize the TronEnergy client
 tron_energy = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')

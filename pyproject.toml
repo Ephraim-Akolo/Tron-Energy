@@ -25,7 +25,7 @@ homepage = "https://itrx.io/"
 repository = "https://github.com/Ephraim-Akolo/Tron-Energy"
 
 [tool.setuptools_scm]
-write_to = "tronenergy/version.py"
+write_to = "tron_energy/version.py"
 version_scheme = "post-release"
 local_scheme = "no-local-version"
 
