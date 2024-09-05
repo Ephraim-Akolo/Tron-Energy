@@ -21,7 +21,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertTrue(result)
 
-    @patch('tronenergy.tron_energy.requests.Session.get')
+    @patch('tron_energy.tron_energy.requests.Session.get')
     def test_get_public_data(self, mock_get):
         # Arrange
         expected_response = {
@@ -44,7 +44,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.post')
+    @patch('tron_energy.tron_energy.requests.Session.post')
     def test_place_order(self, mock_get):
         # Arrange
         expected_response = {
@@ -67,7 +67,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.post')
+    @patch('tron_energy.tron_energy.requests.Session.post')
     def test_transfer_small_trx_amount(self, mock_get):
         # Arrange
         expected_response = {
@@ -88,7 +88,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.post')
+    @patch('tron_energy.tron_energy.requests.Session.post')
     def test_purchase_by_number_of_transfers(self, mock_get):
         # Arrange
         expected_response = {
@@ -108,7 +108,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.get')
+    @patch('tron_energy.tron_energy.requests.Session.get')
     def test_list_purchases_by_number_of_transfers(self, mock_get):
         # Arrange
         expected_response = {
@@ -149,7 +149,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.post')
+    @patch('tron_energy.tron_energy.requests.Session.post')
     def test_create_smart_delegate(self, mock_get):
         # Arrange
         expected_response = {
@@ -171,7 +171,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.get')
+    @patch('tron_energy.tron_energy.requests.Session.get')
     def test_list_smart_delegate(self, mock_get):
         # Arrange
         expected_response = {
@@ -213,7 +213,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.post')
+    @patch('tron_energy.tron_energy.requests.Session.post')
     def test_modify_smart_delegate(self, mock_get):
         # Arrange
         expected_response = {
@@ -232,7 +232,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.get')
+    @patch('tron_energy.tron_energy.requests.Session.get')
     def test_get_order(self, mock_get):
         # Arrange
         expected_response = {
@@ -270,7 +270,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.post')
+    @patch('tron_energy.tron_energy.requests.Session.post')
     def test_recycle_order(self, mock_get):
         # Arrange
         expected_response = {
@@ -289,7 +289,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.get')
+    @patch('tron_energy.tron_energy.requests.Session.get')
     def test_estimate_order(self, mock_get):
         # Arrange
         expected_response = {
@@ -312,7 +312,7 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-    @patch('tronenergy.tron_energy.requests.Session.get')
+    @patch('tron_energy.tron_energy.requests.Session.get')
     def test_get_api_usage_summary(self, mock_get):
         # Arrange
         expected_response = {
