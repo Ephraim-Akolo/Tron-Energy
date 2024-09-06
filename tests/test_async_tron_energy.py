@@ -403,4 +403,38 @@ class TestTronEnergyMethods(unittest.IsolatedAsyncioTestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tron_energy.async_tron_energy.ClientSession.get')
+    async def test_get_api_usage_summary(self, mock_get):
+        # Arrange
+        expected_response = {
+            "name": "MY API",
+            "create_time": "2023-04-28 12:31:04",
+            "total_count": 46,
+            "total_sum_energy": 3696000,
+            "total_sum_trx": 598165000,
+            "today_count": 0,
+            "today_sum_energy": 0,
+            "today_sum_trx": 0,
+            "yesterday_count": 1,
+            "yesterday_sum_energy": 1300000,
+            "yesterday_sum_trx": 197600000
+        }
+        
+        # Mock the response object
+        mock_response = AsyncMock()
+        mock_response.status = 200
+        mock_response.json = AsyncMock(return_value=expected_response)
+
+        # Mock the context manager
+        mock_get.return_value.__aenter__.return_value = mock_response
+        mock_get.return_value.__aexit__.return_value = AsyncMock()
+
+        # Act
+        response = await self.tron_energy.get_api_usage_summary()
     
+        # Assert
+        self.assertEqual(response, expected_response)
+
+
+if __name__ == '__main__':
+    unittest.main()
