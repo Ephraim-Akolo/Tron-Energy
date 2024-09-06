@@ -40,4 +40,7 @@ class AsyncTronEnergy:
             return json.dumps(data, sort_keys=True, separators=(',', ':'))
         return ""
 
+    def _get_timestamp(self):
+        return str(int(time()))
+    
     
