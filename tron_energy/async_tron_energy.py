@@ -32,4 +32,7 @@ class AsyncTronEnergy:
     async def close(self):
         await self.sess.close()
 
+    def _sign(self, message:str):
+        return hmac.new(self._api_secret.encode(), message.encode(), hashlib.sha256).hexdigest()
+
     
