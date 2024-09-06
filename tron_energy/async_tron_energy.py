@@ -74,4 +74,8 @@ class AsyncTronEnergy:
             async with self.sess.get(urljoin(self.base_url, url), params=data, headers=headers) as response:
                 return await self._handle_response(response)
 
+    def verify_signature(self, signature, timestamp, data):
+        computed_signature = self._sign(f"{timestamp}&{self._jsonify(data)}")
+        return hmac.compare_digest(computed_signature, signature)
+
     
