@@ -272,4 +272,31 @@ class TestTronEnergyMethods(unittest.IsolatedAsyncioTestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-   
+    @patch('tron_energy.async_tron_energy.ClientSession.post')
+    async def test_modify_smart_delegate(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0
+        }
+        
+        # Mock the response object
+        mock_response = AsyncMock()
+        mock_response.status = 200
+        mock_response.json = AsyncMock(return_value=expected_response)
+
+        # Mock the context manager
+        mock_get.return_value.__aenter__.return_value = mock_response
+        mock_get.return_value.__aexit__.return_value = AsyncMock()
+
+        data = {
+            "id": 21,
+            "status": False,
+        }
+    
+        # Act
+        response = await self.tron_energy.modify_smart_delegate(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
+    
