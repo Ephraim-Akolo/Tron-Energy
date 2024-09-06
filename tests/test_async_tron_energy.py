@@ -25,4 +25,35 @@ class TestTronEnergyMethods(unittest.IsolatedAsyncioTestCase):
         # Assert
         self.assertTrue(result)
 
+    @patch('tron_energy.async_tron_energy.ClientSession.get')
+    async def test_get_public_data(self, mock_get):
+        # Arrange
+        expected_response = {
+            "platform_avail_energy": 603249,
+            "platform_max_energy": 329009,
+            "minimum_order_energy": 32000,
+            "maximum_order_energy": 100000000,
+            "small_amount": 50000,
+            "small_addition": 0.6,
+            "usdt_energy_need_old": 32000,
+            "usdt_energy_need_new": 65000,
+            "tiered_pricing": [{"period": 0, "price": 100}, {"period": 1, "price": 200}, {"period": 3, "price": 152}, {"period ": 30, "price": 124}],
+            "balance": 813892429257
+        }
+
+        # Mock the response object
+        mock_response = AsyncMock()
+        mock_response.status = 200
+        mock_response.json = AsyncMock(return_value=expected_response)
+
+        # Mock the context manager
+        mock_get.return_value.__aenter__.return_value = mock_response
+        mock_get.return_value.__aexit__.return_value = AsyncMock()
+
+        # Act
+        response = await self.tron_energy.get_public_data()
+
+        # Assert
+        self.assertEqual(response, expected_response)
+
     
