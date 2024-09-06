@@ -345,4 +345,31 @@ class TestTronEnergyMethods(unittest.IsolatedAsyncioTestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tron_energy.async_tron_energy.ClientSession.post')
+    async def test_recycle_order(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "message": "request accept"
+        }
+        
+        # Mock the response object
+        mock_response = AsyncMock()
+        mock_response.status = 200
+        mock_response.json = AsyncMock(return_value=expected_response)
+
+        # Mock the context manager
+        mock_get.return_value.__aenter__.return_value = mock_response
+        mock_get.return_value.__aexit__.return_value = AsyncMock()
+
+        data = {
+            "order_no": "58b451473d290f92443eabf0322b9907"
+        }
+    
+        # Act
+        response = await self.tron_energy.recycle_order(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
    
