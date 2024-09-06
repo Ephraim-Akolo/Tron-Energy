@@ -115,4 +115,32 @@ class TestTronEnergyMethods(unittest.IsolatedAsyncioTestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tron_energy.async_tron_energy.ClientSession.post')
+    async def test_purchase_by_number_of_transfers(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "balance": 813900029257
+        }
+        
+        # Mock the response object
+        mock_response = AsyncMock()
+        mock_response.status = 200
+        mock_response.json = AsyncMock(return_value=expected_response)
+
+        # Mock the context manager
+        mock_get.return_value.__aenter__.return_value = mock_response
+        mock_get.return_value.__aexit__.return_value = AsyncMock()
+
+        data = {
+            "receive_address": "TR7NHnXw5423f8j766h899234567890",
+            "times": 5 
+        }
     
+        # Act
+        response = await self.tron_energy.purchase_by_number_of_transfers(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
+   
