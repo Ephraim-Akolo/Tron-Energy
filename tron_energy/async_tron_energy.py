@@ -43,4 +43,35 @@ class AsyncTronEnergy:
     def _get_timestamp(self):
         return str(int(time()))
     
+    async def _handle_response(self, response:ClientResponse):
+        try:
+            json_response = await response.json()
+        except json.JSONDecodeError as e:
+            response.raise_for_status()
+            raise Exception(f"Failed to decode JSON: {e}")
+        
+        if response.status >= 300 or response.status < 200:
+            raise ClientResponseError(
+                request_info=response.request_info,
+                history=response.history,
+                status=response.status,
+                message=json_response,
+                headers=response.headers
+            )
+        
+        return json_response
+    
+    async def make_request(self, method: str, url: str, data: dict = None):
+        timestamp = self._get_timestamp()
+        headers = {"TIMESTAMP": timestamp}
+        
+        if method.upper() == "POST":
+            json_data = self._jsonify(data)
+            headers["SIGNATURE"] = self._sign(f'{timestamp}&{json_data}')
+            async with self.sess.post(urljoin(self.base_url, url), data=json_data, headers=headers) as response:
+                return await self._handle_response(response)
+        else:
+            async with self.sess.get(urljoin(self.base_url, url), params=data, headers=headers) as response:
+                return await self._handle_response(response)
+
     
