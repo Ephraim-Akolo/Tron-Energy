@@ -35,4 +35,9 @@ class AsyncTronEnergy:
     def _sign(self, message:str):
         return hmac.new(self._api_secret.encode(), message.encode(), hashlib.sha256).hexdigest()
 
+    def _jsonify(self, data:dict):
+        if data:
+            return json.dumps(data, sort_keys=True, separators=(',', ':'))
+        return ""
+
     
