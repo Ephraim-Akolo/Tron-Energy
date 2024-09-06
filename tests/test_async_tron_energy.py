@@ -372,4 +372,35 @@ class TestTronEnergyMethods(unittest.IsolatedAsyncioTestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
-   
+    @patch('tron_energy.async_tron_energy.ClientSession.get')
+    async def test_estimate_order(self, mock_get):
+        # Arrange
+        expected_response = {
+            "period": "1H",
+            "energy_amount": 32000,
+            "price": 100,
+            "total_price": 10192000,
+            "addition": 600000
+        }
+        
+        # Mock the response object
+        mock_response = AsyncMock()
+        mock_response.status = 200
+        mock_response.json = AsyncMock(return_value=expected_response)
+
+        # Mock the context manager
+        mock_get.return_value.__aenter__.return_value = mock_response
+        mock_get.return_value.__aexit__.return_value = AsyncMock()
+
+        data = {
+            "energy_amount": 32000,
+            "period": '1H',
+            }
+    
+        # Act
+        response = await self.tron_energy.estimate_order(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
+    
