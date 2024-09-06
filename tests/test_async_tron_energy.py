@@ -86,4 +86,33 @@ class TestTronEnergyMethods(unittest.IsolatedAsyncioTestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tron_energy.async_tron_energy.ClientSession.post')
+    async def test_transfer_small_trx_amount(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "txid": "9df44479551ef93c9bbfeca3cb82ef1564199d2d492ad38f7f1d2e454f5efb0f",
+            "balance": 813900029257
+        }
+        
+        # Mock the response object
+        mock_response = AsyncMock()
+        mock_response.status = 200
+        mock_response.json = AsyncMock(return_value=expected_response)
+
+        # Mock the context manager
+        mock_get.return_value.__aenter__.return_value = mock_response
+        mock_get.return_value.__aexit__.return_value = AsyncMock()
+
+        data = {
+            "receive_address": "TR7NHnXw5423f8j766h899234567890",
+            "amount": 500_000 # 0.5 TRX
+        }
+    
+        # Act
+        response = await self.tron_energy.transfer_small_trx_amount(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
     
