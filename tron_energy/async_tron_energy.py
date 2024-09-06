@@ -78,4 +78,14 @@ class AsyncTronEnergy:
         computed_signature = self._sign(f"{timestamp}&{self._jsonify(data)}")
         return hmac.compare_digest(computed_signature, signature)
 
+    async def get_public_data(self):
+        """
+        Retrieves public data from the TronEnergy API.
+
+        Returns:
+        dict: A dictionary containing the public data retrieved from the API.
+        """
+        url = "/api/v1/frontend/index-data"
+        return await self.make_request("GET", url)
+
     
