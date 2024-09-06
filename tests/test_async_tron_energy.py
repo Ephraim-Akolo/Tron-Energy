@@ -299,4 +299,50 @@ class TestTronEnergyMethods(unittest.IsolatedAsyncioTestCase):
         # Assert
         self.assertEqual(response, expected_response)
 
+    @patch('tron_energy.async_tron_energy.ClientSession.get')
+    async def test_get_order(self, mock_get):
+        # Arrange
+        expected_response = {
+            "errno": 0,
+            "receive_address": "TExWKszFWYTKZH8LYiovAPKzS3L9MLZ4kw",
+            "order_no": "58b451473d290f92443eabf0322b9907",
+            "energy_amount": 32000,
+            "pay_amount": 0.0,
+            "amount": 3800000,
+            "details": [
+                {
+                    "delegate_hash": "e2e71df638a9e01492a50bebba072a39eb75f673e91d5374ccf517f44e113f3",
+                    "delegate_time": "2023-10-09T10:21:07.840478Z",
+                    "reclaim_hash": "f4672a9563947cf78e5534b4025451dfd75efa5481a67b20ee55b9be368c900",
+                    "reclaim_time": "2023-10-12T10:21:07.840478Z",
+                    "reclaim_time_real": "2023-10-09T10:26:12.617456Z",
+                    "status": 30 # 20-in commission, 30-recycled
+                }
+            ],
+            "create_time": "2023-06-15T21:42:13.200565+08:00",
+            "api_name": "MY API",
+            "period": 0,
+            "status": 30, # 30 indicates that the commission was completely successful
+            "refund_amount": 0
+        }
+        
+        # Mock the response object
+        mock_response = AsyncMock()
+        mock_response.status = 200
+        mock_response.json = AsyncMock(return_value=expected_response)
+
+        # Mock the context manager
+        mock_get.return_value.__aenter__.return_value = mock_response
+        mock_get.return_value.__aexit__.return_value = AsyncMock()
+
+        data = {
+            "order_no": "58b451473d290f92443eabf0322b9907"
+        }
     
+        # Act
+        response = await self.tron_energy.get_order(**data)
+    
+        # Assert
+        self.assertEqual(response, expected_response)
+
+   
