@@ -70,6 +70,82 @@ order_response = tron_energy.place_order(
 print(order_response)
 ```
 
+## Asynchronous Usage
+
+In addition to the synchronous interface, Tron-Energy also provides an asynchronous version for use in applications that require non-blocking I/O operations. The asynchronous class, AsyncTronEnergy, allows you to make API requests without blocking your event loop.
+
+## Asynchronous Example
+Here’s an example of how to use the asynchronous AsyncTronEnergy class:
+
+```python
+import asyncio
+from async_tron_energy import AsyncTronEnergy
+
+async def main():
+    # Initialize the AsyncTronEnergy client
+    tron_energy = AsyncTronEnergy(api_key='your-api-key', api_secret='your-api-secret')
+
+    try:
+        # Retrieve public data
+        public_data = await tron_energy.get_public_data()
+        print(public_data)
+
+        # Estimate the cost of an energy order
+        estimate = await tron_energy.estimate_order(
+            energy_amount=100_000,
+            period='1H'
+        )
+        print(estimate)
+
+        # Place the energy order
+        order_response = await tron_energy.place_order(
+            receive_address="TR7NHnXw5423f8j766h899234567890",
+            energy_amount=100_000,
+            period='1H'
+        )
+        print(order_response)
+    finally:
+        # Close the session to clean up resources
+        await tron_energy.close()
+
+# Run the asynchronous main function
+asyncio.run(main())
+
+```
+
+Or use the python context manager:
+
+```python
+import asyncio
+from async_tron_energy import AsyncTronEnergy
+
+async def main():
+    # Initialize the AsyncTronEnergy client
+    async with AsyncTronEnergy(api_key='your-api-key', api_secret='your-api-secret') as tron_energy:
+        # Retrieve public data
+        public_data = await tron_energy.get_public_data()
+        print(public_data)
+
+        # Estimate the cost of an energy order
+        estimate = await tron_energy.estimate_order(
+            energy_amount=100_000,
+            period='1H'
+        )
+        print(estimate)
+
+        # Place the energy order
+        order_response = await tron_energy.place_order(
+            receive_address="TR7NHnXw5423f8j766h899234567890",
+            energy_amount=100_000,
+            period='1H'
+        )
+        print(order_response)
+
+# Run the asynchronous main function
+asyncio.run(main())
+
+```
+
 ## API Reference
 
 ### `TronEnergy`
@@ -89,6 +165,114 @@ print(order_response)
 - **`verify_signature(self, signature: str, timestamp: str, data: dict) -> bool`**
   - Verifies the authenticity of a signature.
 
+ 
+
+from tron_energy import TronEnergy
+
+# Create an instance of TronEnergy
+tron_energy = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
+
+# Retrieve public data
+public_data = tron_energy.get_public_data()
+print(public_data)
+
+# Place an energy order
+order_response = tron_energy.place_order(
+    receive_address="TR7NHnXw5423f8j766h899234567890",
+    energy_amount=100_000
+)
+print(order_response)
+```
+
+### Example
+
+Here’s an example of how you might use Tron-Energy to estimate the cost of an energy order and then place the order:
+
+```python
+from tron_energy import TronEnergy
+
+# Initialize the TronEnergy client
+tron_energy = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
+
+# Estimate the cost of an energy order
+estimate = tron_energy.estimate_order(
+    energy_amount=100_000,
+    period='1H'
+)
+print(estimate)
+
+# Place the energy order
+order_response = tron_energy.place_order(
+    receive_address="TR7NHnXw5423f8j766h899234567890",
+    energy_amount=100_000,
+    period='1H'
+)
+print(order_response)
+```
+
+### Asynchronous Example
+
+Here’s an example of how to use the asynchronous `AsyncTronEnergy` class:
+
+```python
+import asyncio
+from async_tron_energy import AsyncTronEnergy
+
+async def main():
+    # Initialize the AsyncTronEnergy client
+    tron_energy = AsyncTronEnergy(api_key='your-api-key', api_secret='your-api-secret')
+
+    try:
+        # Retrieve public data
+        public_data = await tron_energy.get_public_data()
+        print(public_data)
+
+        # Estimate the cost of an energy order
+        estimate = await tron_energy.estimate_order(
+            energy_amount=100_000,
+            period='1H'
+        )
+        print(estimate)
+
+        # Place the energy order
+        order_response = await tron_energy.place_order(
+            receive_address="TR7NHnXw5423f8j766h899234567890",
+            energy_amount=100_000,
+            period='1H'
+        )
+        print(order_response)
+    finally:
+        # Close the session to clean up resources
+        await tron_energy.close()
+
+# Run the asynchronous main function
+asyncio.run(main())
+```
+
+### API Reference for Asynchronous Class
+
+#### `AsyncTronEnergy`
+
+- **`__init__(self, api_key: str, api_secret: str)`**
+  - Initializes the `AsyncTronEnergy` object with the given API key and secret.
+
+- **`get_public_data(self) -> dict`**
+  - Asynchronously retrieves public data from the TronEnergy API.
+
+- **`place_order(self, receive_address: TronAddress, energy_amount: int, period: str = '1H', out_trade_no: str = None, callback_url: str = None) -> dict`**
+  - Asynchronously places an energy order on the TronEnergy API.
+
+- **`estimate_order(self, energy_amount: int, period: str = '1H') -> dict`**
+  - Asynchronously estimates the cost of an energy order.
+
+- **`make_request(self, method: str, url: str, data: dict = None) -> dict`**
+  - Asynchronously makes a request to the TronEnergy API.
+
+- **`verify_signature(self, signature: str, timestamp: str, data: dict) -> bool`**
+  - Verifies the authenticity of a signature asynchronously.
+
+- **`close(self)`**
+  - Asynchronously closes the client session to clean up resources.
 
 ## Testing
 
