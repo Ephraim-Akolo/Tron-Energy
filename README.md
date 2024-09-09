@@ -24,27 +24,7 @@ Ensure you have Python 3.6 or higher installed.
 
 ## Usage
 
-To use the Tron-Energy package, start by importing the necessary classes and creating an instance of the `TronEnergy` class:
-
-```python
-from tron_energy import TronEnergy
-
-# Create an instance of TronEnergy
-client = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
-
-# Retrieve public data
-public_data = client.get_public_data()
-print(public_data)
-
-# Place an energy order
-order_response = client.place_order(
-    receive_address="TR7NHnXw5423f8j766h899234567890",
-    energy_amount=100_000
-)
-print(order_response)
-```
-
-### Example
+To use the Tron-Energy package, start by importing the necessary classes and creating an instance of the `TronEnergy` class.
 
 Here’s an example of how you might use Tron-Energy to estimate the cost of an energy order and then place the order:
 
@@ -53,6 +33,10 @@ from tron_energy import TronEnergy
 
 # Initialize the TronEnergy client
 client = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
+
+# Retrieve public data
+public_data = await client.get_public_data()
+print(public_data)
 
 # Estimate the cost of an energy order
 estimate = client.estimate_order(
@@ -74,7 +58,6 @@ print(order_response)
 
 In addition to the synchronous interface, Tron-Energy provides an asynchronous version for applications requiring non-blocking I/O operations. The asynchronous class, AsyncTronEnergy, allows you to make API requests without blocking your event loop.
 
-## Asynchronous Example
 Here’s an example of how to use the asynchronous AsyncTronEnergy class:
 
 ```python
@@ -145,49 +128,6 @@ async def main():
 asyncio.run(main())
 
 ```
-
-## API Reference
-
-### `TronEnergy`
-
-- **`__init__(self, api_key: str, api_secret: str)`**
-  - Initializes the `TronEnergy` object with the given API key and secret.
-  
-- **`get_public_data(self) -> dict`**
-  - Retrieves public data from the TronEnergy API.
-  
-- **`place_order(self, receive_address: TronAddress, energy_amount: int, period: str = '1H', out_trade_no: str = None, callback_url: str = None) -> dict`**
-  - Places an energy order on the TronEnergy API.
-
-- **`make_request(self, method: str, url: str, data: dict = None) -> dict`**
-  - Makes a request to the TronEnergy API.
-
-- **`verify_signature(self, signature: str, timestamp: str, data: dict) -> bool`**
-  - Verifies the authenticity of a signature.
-
-
-#### `AsyncTronEnergy`
-
-- **`__init__(self, api_key: str, api_secret: str)`**
-  - Initializes the `AsyncTronEnergy` object with the given API key and secret.
-
-- **`get_public_data(self) -> dict`**
-  - Asynchronously retrieves public data from the TronEnergy API.
-
-- **`place_order(self, receive_address: TronAddress, energy_amount: int, period: str = '1H', out_trade_no: str = None, callback_url: str = None) -> dict`**
-  - Asynchronously places an energy order on the TronEnergy API.
-
-- **`estimate_order(self, energy_amount: int, period: str = '1H') -> dict`**
-  - Asynchronously estimates the cost of an energy order.
-
-- **`make_request(self, method: str, url: str, data: dict = None) -> dict`**
-  - Asynchronously makes a request to the TronEnergy API.
-
-- **`verify_signature(self, signature: str, timestamp: str, data: dict) -> bool`**
-  - Verifies the authenticity of a signature asynchronously.
-
-- **`close(self)`**
-  - Asynchronously closes the client session to clean up resources.
 
 ## Testing
 
