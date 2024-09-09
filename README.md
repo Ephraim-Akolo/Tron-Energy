@@ -30,14 +30,14 @@ To use the Tron-Energy package, start by importing the necessary classes and cre
 from tron_energy import TronEnergy
 
 # Create an instance of TronEnergy
-tron_energy = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
+client = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
 
 # Retrieve public data
-public_data = tron_energy.get_public_data()
+public_data = client.get_public_data()
 print(public_data)
 
 # Place an energy order
-order_response = tron_energy.place_order(
+order_response = client.place_order(
     receive_address="TR7NHnXw5423f8j766h899234567890",
     energy_amount=100_000
 )
