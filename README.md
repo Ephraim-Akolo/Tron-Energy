@@ -12,7 +12,7 @@ pip install tron_energy
 ```
 
 
-Ensure you have Python 3.6 or higher installed.
+Python 3.7 or higher installed is fine.
 
 ## Usage
 
