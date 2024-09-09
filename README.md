@@ -27,7 +27,7 @@ from tron_energy import TronEnergy
 client = TronEnergy(api_key='your-api-key', api_secret='your-api-secret')
 
 # Retrieve public data
-public_data = await client.get_public_data()
+public_data = client.get_public_data()
 print(public_data)
 
 # Estimate the cost of an energy order
