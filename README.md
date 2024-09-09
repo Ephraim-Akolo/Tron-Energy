@@ -3,14 +3,6 @@
 
 Tron-Energy is a Python package that simplifies interaction with the [Tron energy](https://itrx.io/) lending RESTful API. It provides a clean and easy-to-use interface for placing energy orders, estimating costs, and managing your API usage on the Tron network. The package ensures secure communication with the API by handling signature creation and request authentication.
 
-## Features
-
-- Retrieve public data from the TronEnergy API.
-- Place energy orders with customizable parameters.
-- Estimate the cost of energy orders before placing them.
-- Manage and monitor API usage effectively.
-- Secure API requests with HMAC-based signature verification.
-
 ## Installation
 
 To install the Tron-Energy package, run the command:
