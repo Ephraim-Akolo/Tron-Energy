@@ -79,7 +79,7 @@ Here’s an example of how to use the asynchronous AsyncTronEnergy class:
 
 ```python
 import asyncio
-from async_tron_energy import AsyncTronEnergy
+from tron_energy import AsyncTronEnergy
 
 async def main():
     # Initialize the AsyncTronEnergy client
@@ -117,7 +117,7 @@ Or use the python context manager:
 
 ```python
 import asyncio
-from async_tron_energy import AsyncTronEnergy
+from tron_energy import AsyncTronEnergy
 
 async def main():
     # Initialize the AsyncTronEnergy client
