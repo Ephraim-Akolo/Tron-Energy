@@ -71,6 +71,16 @@ class TronEnergy(object):
         url = "/api/v1/frontend/index-data"
         return self.make_request("GET", url)
     
+    def get_wallet_balance(self):
+        """
+        Retrieves your wallet balance.
+
+        Returns:
+        dict: A dictionary containing the public data retrieved from the API.
+        """
+        resp = self.get_public_data()
+        return resp['balance']
+    
     def place_order(self, receive_address:TronAddress, energy_amount:int, period:str='1H', out_trade_no:str=None, callback_url:str=None):
         """
         Places an energy order on the TronEnergy API.

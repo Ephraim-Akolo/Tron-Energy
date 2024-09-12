@@ -87,6 +87,16 @@ class AsyncTronEnergy:
         """
         url = "/api/v1/frontend/index-data"
         return await self.make_request("GET", url)
+    
+    async def get_wallet_balance(self):
+        """
+        Retrieves your wallet balance.
+
+        Returns:
+        dict: A dictionary containing the public data retrieved from the API.
+        """
+        resp = await self.get_public_data()
+        return resp['balance']
 
     async def place_order(self, receive_address:TronAddress, energy_amount:int, period:str='1H', out_trade_no:str=None, callback_url:str=None):
         """
