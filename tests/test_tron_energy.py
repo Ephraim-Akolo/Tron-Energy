@@ -67,6 +67,29 @@ class TestTronEnergyMethods(unittest.TestCase):
         # Assert
         self.assertEqual(response, expected_response['balance'])
 
+    @patch('tron_energy.tron_energy.requests.Session.get')
+    def test_get_platform_avail_energy(self, mock_get):
+        # Arrange
+        expected_response = {
+            "platform_avail_energy": 603249,
+            "platform_max_energy": 329009,
+            "minimum_order_energy": 32000,
+            "maximum_order_energy": 100000000,
+            "small_amount": 50000,
+            "small_addition": 0.6,
+            "usdt_energy_need_old": 32000,
+            "usdt_energy_need_new": 65000,
+            "tiered_pricing": [{"period": 0, "price": 100}, {"period": 1, "price": 200}, {"period": 3, "price": 152}, {"period ": 30, "price": 124}],
+            "balance": 813892429257
+        }
+        mock_get.return_value.json.return_value = expected_response
+    
+        # Act
+        response = self.tron_energy.get_platform_avail_energy()
+    
+        # Assert
+        self.assertEqual(response, expected_response['platform_avail_energy'])
+
     @patch('tron_energy.tron_energy.requests.Session.post')
     def test_place_order(self, mock_get):
         # Arrange
