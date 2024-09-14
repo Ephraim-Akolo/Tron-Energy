@@ -81,6 +81,16 @@ class TronEnergy(object):
         resp = self.get_public_data()
         return resp['balance']
     
+    def get_platform_avail_energy(self):
+        """
+        Retrieves the platform available energy.
+
+        Returns:
+        dict: A dictionary containing the public data retrieved from the API.
+        """
+        resp = self.get_public_data()
+        return resp['platform_avail_energy']
+    
     def place_order(self, receive_address:TronAddress, energy_amount:int, period:str='1H', out_trade_no:str=None, callback_url:str=None):
         """
         Places an energy order on the TronEnergy API.
